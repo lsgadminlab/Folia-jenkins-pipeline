@@ -1,18 +1,18 @@
 # ─────────────────────────────────────────────
-# Stage 1: Download PaperMC JAR
+# Stage 1: Download FoliaMC JAR
 # ─────────────────────────────────────────────
 FROM eclipse-temurin:21-jdk-alpine AS builder
 
-ARG PAPER_VERSION=1.21.11
-ARG PAPER_BUILD
-ARG PAPER_URL="https://fill-data.papermc.io/v1/objects/5ffef465eeeb5f2a3c23a24419d97c51afd7dbb4923ff42df9a3f58bba1ccfba/paper-1.21.11-132.jar"
+ARG FOLIA_VERSION=1.21.11
+ARG FOLIA_BUILD
+ARG FOLIA_URL="https://fill-data.papermc.io/v1/objects/f52c408490a0225611e67907a3ca19f7e6da2c6bc899e715d5f46844e7103c39/folia-1.21.11-14.jar"
 
 WORKDIR /build
 RUN apk add --no-cache curl jq
 
 RUN set -eux; \
-    echo "Downloading Paper from: ${PAPER_URL}"; \
-    curl -fL --retry 5 --retry-delay 2 -o paper.jar "${PAPER_URL}"
+    echo "Downloading Folia from: ${FOLIA_URL}"; \
+    curl -fL --retry 5 --retry-delay 2 -o folia.jar "${FOLIA_URL}"
       
 # ─────────────────────────────────────────────
 # Stage 2: Runtime image
@@ -20,7 +20,7 @@ RUN set -eux; \
 FROM eclipse-temurin:21-jre-alpine
 
 LABEL maintainer="lsgadminlab" \
-      org.opencontainers.image.title="PaperMC" \
+      org.opencontainers.image.title="FoliaMC" \
       org.opencontainers.image.version="1.21.11" \
       org.opencontainers.image.source="https://github.com/lsgadminlab/PaperMC-K8s-Resources"
 
@@ -32,7 +32,7 @@ RUN addgroup -S minecraft && adduser -S minecraft -G minecraft
 
 WORKDIR /server
 
-COPY --from=builder /build/paper.jar paper.jar
+COPY --from=builder /build/folia.jar folia.jar
 
 RUN echo "eula=true" > eula.txt
 
@@ -67,5 +67,5 @@ ENTRYPOINT ["sh", "-c", \
         -XX:+PerfDisableSharedMem \
         -XX:MaxTenuringThreshold=1 \
         ${MC_EXTRA_OPTS} \
-        -jar paper.jar \
+        -jar folia.jar \
         --nogui"]
