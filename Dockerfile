@@ -8,7 +8,7 @@ ARG FOLIA_BUILD
 ARG FOLIA_URL="https://fill-data.papermc.io/v1/objects/f52c408490a0225611e67907a3ca19f7e6da2c6bc899e715d5f46844e7103c39/folia-1.21.11-14.jar"
 
 WORKDIR /build
-RUN apk add --no-cache curl jq
+RUN apk add --no-cache curl jq nano
 
 RUN set -eux; \
     echo "Downloading Folia from: ${FOLIA_URL}"; \
