@@ -22,7 +22,7 @@ FROM eclipse-temurin:21-jre-alpine
 LABEL maintainer="lsgadminlab" \
       org.opencontainers.image.title="FoliaMC" \
       org.opencontainers.image.version="1.21.11" \
-      org.opencontainers.image.source="https://github.com/lsgadminlab/PaperMC-K8s-Resources"
+      org.opencontainers.image.source="https://github.com/lsgadminlab/Folia-jenkins-pipeline.git"
 
 ENV MC_RAM_MIN=1G \
     MC_RAM_MAX=4G \
