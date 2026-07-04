@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         REGISTRY      = 'docker.lsgserver.dev'
-        IMAGE_NAME    = 'lobby'
+        IMAGE_NAME    = 'folia'
         FOLIA_VERSION = '1.21.11'
         IMAGE_BASE    = "${REGISTRY}/${IMAGE_NAME}"
         FOLIA_BUILD   = '123'
